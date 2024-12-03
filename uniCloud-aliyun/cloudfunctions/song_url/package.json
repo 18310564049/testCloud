@@ -1,0 +1,7 @@
+{
+  "name": "song_url",
+  "dependencies": {},
+  "extensions": {
+    "uni-cloud-jql": {}
+  }
+}
