@@ -42,7 +42,7 @@ const createRequest = (options) => {
       headers['X-Real-IP'] = ip;
       headers['X-Forwarded-For'] = ip;
     }
-    console.log(options);
+    // console.log(options);
     const defaultParams = {
       dfid,
       mid,
@@ -64,7 +64,7 @@ const createRequest = (options) => {
     }
     // console.log(params);
     const data = typeof options?.data === 'object' ? JSON.stringify(options.data) : options?.data || '';
-    console.log('gongjie',params,data);
+    // console.log('gongjie',params,data);
 
     if (!params['signature'] && !options.notSignature) {
       switch (options?.encryptType) {
