@@ -1,5 +1,7 @@
 <template>
 	<view class="content">
+		
+
 		<view class="text-area">
 			<button @click="captcha_sent">获取</button>
 			<input class="uni-input1"  v-model="code" />
@@ -16,7 +18,7 @@
 			<input type="button" value="搜索" @click="search"/>
 		</view>
 		<view class="content-list">
-			<view v-for="(item,index) in list" key="index" style="display: flex;justify-content: space-between;	">
+			<view v-for="(item,index) in list" :key="index" style="display: flex;justify-content: space-between;	">
 				<text @click="checkAudio(item)">{{item.songname}}</text> 
 				<button type="button" @click="uploadAndStoreInDatabase(item)">下载</button>
 			</view>
@@ -32,6 +34,7 @@
 				{{data}}
 			</view>
 		</unicloud-db> -->
+		
 	</view>
 </template>
 
@@ -58,7 +61,8 @@
 				db: uniCloud.database(),
 				keywords:'光良',
 				searchValue:0,
-				searchTypeArr:['歌曲','歌手']
+				searchTypeArr:['歌曲','歌手'],
+				res:null
 			}
 		},
 		async onLoad() {
@@ -80,6 +84,18 @@
 		 this.getSongList()
 		},
 		methods: {
+			getPhone(){
+				console.log(1111)
+				wx.login({
+				  success(res) {
+				    if (res.code) {
+				      // 发送 res.code 到后台换取 openId, sessionKey, unionId
+				    } else {
+				      console.log('登录失败！' + res.errMsg)
+				    }
+				  }
+				})
+			},
 			bindPickerChange(e){
 				 this.searchValue = e.detail.value
 			},
@@ -147,6 +163,7 @@
 			async recommend_songs() {
 				let obj = {cookie:{userid:'911143019',token:'e7dbf735140e5d96b9a6651db4e8838d208e43dff5b7b9171f214d6ded0bb592'}}
 				let res = await  this.requestHttp('recommend_songs',obj)
+				this.res = res
 				let data = res.body.data
 				this.list = data.song_list.filter(item => item.privilege === 8)
 				this.list.splice(1,4)

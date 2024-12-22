@@ -2,14 +2,32 @@
     "version" : "1.0",
     "configurations" : [
         {
+            "app-harmony" : {
+                "launchtype" : "local"
+            },
+            "app-plus" : {
+                "launchtype" : "local"
+            },
             "default" : {
                 "launchtype" : "local"
             },
             "h5" : {
-                "launchtype" : "local"
+                "launchtype" : "remote"
+            },
+            "mp-weixin" : {
+                "launchtype" : "remote"
             },
             "provider" : "aliyun",
             "type" : "uniCloud"
+        },
+        {
+            "openVueDevtools" : true,
+            "playground" : "standard",
+            "type" : "uni-app:app-ios"
+        },
+        {
+            "openVueDevtools" : true,
+            "type" : "uni-app:app-android"
         }
     ]
 }
